@@ -77,15 +77,15 @@ Answer: Unilever 4.1999998090000000*/
 /*11.Find all the job titles that contain the word ‘Analyst’. How many different job titles are there?
 SELECT COUNT(title)
 FROM data_analyst_jobs
-WHERE title Like '%Analyst%'
-Answer: 1636 different job titles*/ 
+WHERE lower(title) LIKE '%analyst%'
+Answer: 1699 different job titles*/ 
 
 /*12.How many different job titles do not contain either the word ‘Analyst’ or the word ‘Analytics’? What word do these positions have in common?
 SELECT title
 FROM data_analyst_jobs
-WHERE title NOT LIKE'%Analyst%'
-OR title  NOT LIKE '%Analytics%'
-Answer: 106 job titles*/
+WHERE lower(title) NOT LIKE '%analyst%' 
+AND lower (title) NOT LIKE '%analytics%'
+Answer: 4 job titles. The word that these positions have in common is Tableau*/
 
 /*Bonus You want to understand which jobs requiring SQL are hard to fill. Find the number of jobs by industry (domain) that require SQL and have been posted longer than 3 weeks.
 SELECT COUNT(title) AS hard_to_fill , domain
@@ -97,3 +97,4 @@ GROUP BY domain
 ORDER BY hard_to_fill  DESC
 Answer Pt 1: 1. Internet and Software 2. Banks and Financial Services 3. Consulting and Business Services
 Answer Pt 2: 62 jobs for Internet and Software, 61 jobs for Banks and Financial Services, 57 jobs for Consulting and Business Services, and 52 jobs for Health Care*/
+

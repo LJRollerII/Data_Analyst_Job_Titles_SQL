@@ -15,20 +15,25 @@ LIMIT 10
 Answer: ExxonMobil is the company associated in the 10th row*/
 
 /*3.How many postings are in Tennessee? How many are there in either Tennessee or Kentucky?
+SELECT COUNT(title)
+FROM data_analyst_jobs
+WHERE location = 'TN'
+
 SELECT title
 FROM data_analyst_jobs
 WHERE location = 'TN' OR location ='KY'
+
 Answer: There are 21 postings in TN.There are 27 positings in either TN or KY*/
 
 /*4.How many postings in Tennessee have a star rating above 4?
-SELECT star_rating, location
+SELECT COUNT(star_rating)
 FROM data_analyst_jobs
 WHERE star_rating > 4
 AND location = 'TN'
 Answer: 3 postings*/
 
 /*5.How many postings in the dataset have a review count between 500 and 1000?
-SELECT review_count
+SELECT COUNT(review_count)
 FROM data_analyst_jobs
 WHERE review_count BETWEEN 500 AND 1000
 Answer: 151 postings*/
@@ -42,12 +47,12 @@ ORDER BY avg_rating
 Answer:Nebraska (NE) has the highest average rating*/
 
 /*7.Select unique job titles from the data_analyst_jobs table. How many are there?
-SELECT DISTINCT title
+SELECT COUNT(DISTINCT title)
 FROM data_analyst_jobs
 Answer: 881 unique job titles*/
 
 /*8.How many unique job titles are there for California companies?
-SELECT DISTINCT title
+SELECT COUNT(DISTINCT title)
 FROM data_analyst_jobs
 WHERE location = 'CA'
 Answer: 230 unique job titles in California (CA)*/
@@ -70,7 +75,7 @@ ORDER BY AVG(star_rating) DESC
 Answer: Unilever 4.1999998090000000*/
 
 /*11.Find all the job titles that contain the word ‘Analyst’. How many different job titles are there?
-SELECT title
+SELECT COUNT(title)
 FROM data_analyst_jobs
 WHERE title Like '%Analyst%'
 Answer: 1636 different job titles*/ 
@@ -82,4 +87,13 @@ WHERE title NOT LIKE'%Analyst%'
 OR title  NOT LIKE '%Analytics%'
 Answer: 106 job titles*/
 
-
+/*Bonus You want to understand which jobs requiring SQL are hard to fill. Find the number of jobs by industry (domain) that require SQL and have been posted longer than 3 weeks.
+SELECT COUNT(title) AS hard_to_fill , domain
+FROM data_analyst_jobs
+WHERE domain IS NOT NULL
+AND skill Like '%SQL%'
+AND days_since_posting > 21
+GROUP BY domain
+ORDER BY hard_to_fill  DESC
+Answer Pt 1: 1. Internet and Software 2. Banks and Financial Services 3. Consulting and Business Services
+Answer Pt 2: 62 jobs for Internet and Software, 61 jobs for Banks and Financial Services, 57 jobs for Consulting and Business Services, and 52 jobs for Health Care*/

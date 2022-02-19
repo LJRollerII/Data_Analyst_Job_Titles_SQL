@@ -3,6 +3,11 @@ FROM data_analyst_jobs*/
 
 /*WHERE lower(title) LIKE '%analyst%';*/
 
+/*SELECT *
+FROM (SELECT ROW_NUMBER () OVER () AS RowNum, *
+        FROM data_analyst_jobs ) sub
+WHERE RowNum = 100;*/
+
 /*1.How many rows are in the data_analyst_jobs table?
 SELECT COUNT(*) 
 FROM data_analyst_jobs;
@@ -19,11 +24,12 @@ SELECT COUNT(title)
 FROM data_analyst_jobs
 WHERE location = 'TN'
 
-SELECT title
+SELECT COUNT(title)
 FROM data_analyst_jobs
 WHERE location = 'TN' OR location ='KY'
 
-Answer: There are 21 postings in TN.There are 27 positings in either TN or KY*/
+Answer Pt.1: There are 21 postings in TN.
+Answer Pt.2: There are 27 positings in either TN or KY*/
 
 /*4.How many postings in Tennessee have a star rating above 4?
 SELECT COUNT(star_rating)
@@ -75,13 +81,13 @@ ORDER BY AVG(star_rating) DESC
 Answer: Unilever 4.1999998090000000*/
 
 /*11.Find all the job titles that contain the word ‘Analyst’. How many different job titles are there?
-SELECT COUNT(title)
+SELECT COUNT(DISTINCT title)
 FROM data_analyst_jobs
 WHERE lower(title) LIKE '%analyst%'
-Answer: 1699 different job titles*/ 
+Answer: 774 different job titles*/ 
 
 /*12.How many different job titles do not contain either the word ‘Analyst’ or the word ‘Analytics’? What word do these positions have in common?
-SELECT title
+SELECT DISTINCT title
 FROM data_analyst_jobs
 WHERE lower(title) NOT LIKE '%analyst%' 
 AND lower (title) NOT LIKE '%analytics%'
@@ -97,4 +103,3 @@ GROUP BY domain
 ORDER BY hard_to_fill  DESC
 Answer Pt 1: 1. Internet and Software 2. Banks and Financial Services 3. Consulting and Business Services
 Answer Pt 2: 62 jobs for Internet and Software, 61 jobs for Banks and Financial Services, 57 jobs for Consulting and Business Services, and 52 jobs for Health Care*/
-
